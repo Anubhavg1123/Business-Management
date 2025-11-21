@@ -1,0 +1,1634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANU CREATIVE - Premium Grocery & Stationery</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --accent: #ff6b6b;
+            --success: #4cd964;
+            --warning: #ffcc00;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --customer: #4cd964;
+            --manager: #ff6b6b;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,128L48,144C96,160,192,192,288,186.7C384,181,480,139,576,128C672,117,768,139,864,149.3C960,160,1056,160,1152,138.7C1248,117,1344,75,1392,53.3L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: bottom;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 40px;
+            padding-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+        
+        .category-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .product-card {
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border: none;
+            border-radius: 30px;
+            padding: 10px 25px;
+            font-weight: 600;
+        }
+        
+        .btn-customer {
+            background: linear-gradient(to right, var(--customer), #2ecc71);
+            border: none;
+            border-radius: 30px;
+            padding: 10px 25px;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .btn-manager {
+            background: linear-gradient(to right, var(--manager), #ff8e8e);
+            border: none;
+            border-radius: 30px;
+            padding: 10px 25px;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary);
+            border-color: var(--primary);
+            border-radius: 30px;
+            padding: 10px 25px;
+            font-weight: 600;
+        }
+        
+        .btn-outline-primary:hover {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-color: transparent;
+            color: white;
+        }
+        
+        .offer-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(to right, var(--accent), #ff8e8e);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .footer {
+            background: linear-gradient(to right, var(--dark), #343a40);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer a:hover {
+            color: white;
+        }
+        
+        .page-section {
+            padding: 80px 0;
+        }
+        
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--accent);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        
+        .category-icon {
+            font-size: 2.5rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-card {
+            border-left: 4px solid var(--primary);
+            padding-left: 20px;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .about-hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1563017405-8d4c6ab7fb2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0;
+            text-align: center;
+        }
+        
+        .stats-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .page-content {
+            min-height: 60vh;
+        }
+        
+        .nav-pills .nav-link.active {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 30px;
+        }
+        
+        .nav-pills .nav-link {
+            color: var(--dark);
+            font-weight: 500;
+        }
+        
+        .product-filter {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        
+        .contact-info-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            text-align: center;
+            height: 100%;
+            transition: transform 0.3s;
+        }
+        
+        .contact-info-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .store-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        
+        .store-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .team-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        
+        .team-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            margin-right: 10px;
+            transition: transform 0.3s;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px);
+        }
+        
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .shape-1 {
+            width: 100px;
+            height: 100px;
+            top: 10%;
+            left: 5%;
+        }
+        
+        .shape-2 {
+            width: 150px;
+            height: 150px;
+            bottom: 10%;
+            right: 5%;
+        }
+        
+        .page-indicator {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+        }
+        
+        .page-dot {
+            display: block;
+            width: 12px;
+            height: 12px;
+            background-color: #ddd;
+            border-radius: 50%;
+            margin: 15px 0;
+            transition: all 0.3s;
+        }
+        
+        .page-dot.active {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            transform: scale(1.5);
+        }
+        
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .login-container {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .login-header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .login-tabs {
+            display: flex;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .login-tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .login-tab.active {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+        
+        .login-form {
+            padding: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-control {
+            border-radius: 30px;
+            padding: 12px 20px;
+        }
+        
+        .dashboard-section {
+            display: none;
+        }
+        
+        .customer-dashboard {
+            background: linear-gradient(to right, rgba(76, 217, 100, 0.1), rgba(46, 204, 113, 0.1));
+        }
+        
+        .manager-dashboard {
+            background: linear-gradient(to right, rgba(255, 107, 107, 0.1), rgba(255, 142, 142, 0.1));
+        }
+        
+        .dashboard-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+            transition: transform 0.3s;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .dashboard-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .customer-dashboard .dashboard-icon {
+            color: var(--customer);
+        }
+        
+        .manager-dashboard .dashboard-icon {
+            color: var(--manager);
+        }
+        
+        .user-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        
+        .customer-badge {
+            background: rgba(76, 217, 100, 0.2);
+            color: var(--customer);
+        }
+        
+        .manager-badge {
+            background: rgba(255, 107, 107, 0.2);
+            color: var(--manager);
+        }
+        
+        .order-status {
+            display: inline-flex;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .status-pending {
+            background: rgba(255, 204, 0, 0.2);
+            color: #cc9900;
+        }
+        
+        .status-completed {
+            background: rgba(76, 217, 100, 0.2);
+            color: var(--customer);
+        }
+        
+        .status-cancelled {
+            background: rgba(255, 107, 107, 0.2);
+            color: var(--manager);
+        }
+        
+        @media (max-width: 768px) {
+            .page-indicator {
+                display: none;
+            }
+            
+            .hero-section {
+                padding: 80px 0;
+            }
+            
+            .page-section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-star me-2"></i>ANU CREATIVE
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#products">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#stores">Our Stores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <div class="input-group me-3" style="max-width: 300px;">
+                        <input type="text" class="form-control" placeholder="Search products...">
+                        <button class="btn btn-outline-primary" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    <div class="position-relative me-3">
+                        <a href="#" class="text-dark">
+                            <i class="fas fa-shopping-cart fa-lg"></i>
+                            <span class="cart-badge">3</span>
+                        </a>
+                    </div>
+                    <div id="user-info" class="d-none">
+                        <span id="user-name" class="me-2 fw-bold"></span>
+                        <span id="user-badge" class="user-badge"></span>
+                        <button id="logout-btn" class="btn btn-outline-primary btn-sm ms-2">Logout</button>
+                    </div>
+                    <div id="login-buttons">
+                        <button id="login-btn" class="btn btn-outline-primary me-2">Login</button>
+                        <button id="signup-btn" class="btn btn-primary">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Indicator -->
+    <div class="page-indicator d-none d-md-block">
+        <a href="#home" class="page-dot active" data-page="home"></a>
+        <a href="#products" class="page-dot" data-page="products"></a>
+        <a href="#about" class="page-dot" data-page="about"></a>
+        <a href="#stores" class="page-dot" data-page="stores"></a>
+        <a href="#contact" class="page-dot" data-page="contact"></a>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-container">
+            <div class="login-header">
+                <h3 class="mb-0">Welcome to ANU CREATIVE</h3>
+                <p class="mb-0">Please login to continue</p>
+            </div>
+            <div class="login-tabs">
+                <div class="login-tab active" data-tab="customer">Customer</div>
+                <div class="login-tab" data-tab="manager">Manager</div>
+            </div>
+            <div class="login-form">
+                <div id="customer-login">
+                    <div class="form-group">
+                        <label for="customer-email" class="form-label">Email Address</label>
+                        <input type="email" class="form-control" id="customer-email" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="customer-password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="customer-password" placeholder="Enter your password">
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="remember-me">
+                        <label class="form-check-label" for="remember-me">Remember me</label>
+                    </div>
+                    <button class="btn btn-customer w-100 mb-3" id="customer-login-btn">Login as Customer</button>
+                    <div class="text-center">
+                        <a href="#" class="text-muted">Forgot your password?</a>
+                    </div>
+                </div>
+                <div id="manager-login" style="display: none;">
+                    <div class="form-group">
+                        <label for="manager-username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="manager-username" placeholder="Enter your username">
+                    </div>
+                    <div class="form-group">
+                        <label for="manager-password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="manager-password" placeholder="Enter your password">
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="manager-remember">
+                        <label class="form-check-label" for="manager-remember">Remember me</label>
+                    </div>
+                    <button class="btn btn-manager w-100" id="manager-login-btn">Login as Manager</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Home Page -->
+    <section id="home" class="page-section">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="container hero-content">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <h1 class="display-4 fw-bold mb-4">Welcome to ANU CREATIVE</h1>
+                        <p class="lead mb-4">Your one-stop destination for premium groceries, stationery, and creative supplies. We bring quality and innovation to your everyday needs.</p>
+                        <a href="#products" class="btn btn-light btn-lg me-3">Shop Now</a>
+                        <a href="#about" class="btn btn-outline-light btn-lg">Learn More</a>
+                    </div>
+                    <div class="col-lg-6 text-center">
+                        <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="img-fluid rounded shadow-lg" alt="Shopping Experience">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="container mt-5">
+            <div class="row text-center">
+                <div class="col-md-4 mb-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h4>Free Delivery</h4>
+                    <p class="text-muted">Free delivery on orders above ₹499 within the city</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-undo-alt"></i>
+                    </div>
+                    <h4>Easy Returns</h4>
+                    <p class="text-muted">7-day hassle-free return policy for all products</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4>Secure Payment</h4>
+                    <p class="text-muted">Your payment information is safe with our encrypted system</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categories Section -->
+        <div class="container mt-5">
+            <h2 class="section-title">Shop By Category</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card category-card text-center p-4 h-100">
+                        <div class="category-icon">
+                            <i class="fas fa-apple-alt"></i>
+                        </div>
+                        <h4>Fresh Groceries</h4>
+                        <p class="text-muted">Farm-fresh fruits, vegetables, dairy products and more</p>
+                        <a href="#" class="btn btn-outline-primary mt-auto">Explore</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card category-card text-center p-4 h-100">
+                        <div class="category-icon">
+                            <i class="fas fa-pen-fancy"></i>
+                        </div>
+                        <h4>Stationery</h4>
+                        <p class="text-muted">Premium pens, notebooks, art supplies and office essentials</p>
+                        <a href="#" class="btn btn-outline-primary mt-auto">Explore</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card category-card text-center p-4 h-100">
+                        <div class="category-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h4>Creative Supplies</h4>
+                        <p class="text-muted">Art materials, craft items, and creative tools for all ages</p>
+                        <a href="#" class="btn btn-outline-primary mt-auto">Explore</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Featured Products -->
+        <div class="container mt-5">
+            <h2 class="section-title">Featured Products</h2>
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <div class="card product-card h-100">
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1582515073490-39981397c445?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Organic Apples">
+                            <span class="offer-badge">20% OFF</span>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Organic Carrot</h5>
+                            <p class="card-text text-muted">Fresh, crunchy organic apples from local farms.</p>
+                            <div class="mt-auto">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="text-muted text-decoration-line-through">₹200/kg</span>
+                                        <span class="fw-bold text-primary ms-2">₹160/kg</span>
+                                    </div>
+                                    <button class="btn btn-primary btn-sm add-to-cart">
+                                        <i class="fas fa-cart-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card product-card h-100">
+                        <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Premium Notebook">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Premium Quality Rice</h5>
+                            <p class="card-text text-muted">200 pages hardcover notebook with premium paper.</p>
+                            <div class="mt-auto">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="fw-bold text-primary">₹250</span>
+                                    <button class="btn btn-primary btn-sm add-to-cart">
+                                        <i class="fas fa-cart-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card product-card h-100">
+                        <div class="position-relative">
+                            <img src="https://images.unsplash.com/photo-1625772299848-391b6a87d7b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Olive Oil">
+                            <span class="offer-badge">15% OFF</span>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Strong Sprit</h5>
+                            <p class="card-text text-muted">500ml bottle of premium extra virgin olive oil.</p>
+                            <div class="mt-auto">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="text-muted text-decoration-line-through">₹450</span>
+                                        <span class="fw-bold text-primary ms-2">₹382</span>
+                                    </div>
+                                    <button class="btn btn-primary btn-sm add-to-cart">
+                                        <i class="fas fa-cart-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card product-card h-100">
+                        <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Art Supplies">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">Art Supplies Set</h5>
+                            <p class="card-text text-muted">Complete set of 24 colored pencils and sketchbook.</p>
+                            <div class="mt-auto">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="fw-bold text-primary">₹599</span>
+                                    <button class="btn btn-primary btn-sm add-to-cart">
+                                        <i class="fas fa-cart-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="#products" class="btn btn-primary">View All Products</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Page -->
+    <section id="products" class="page-section bg-light" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">Our Products</h2>
+            
+            <div class="product-filter">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search products...">
+                            <button class="btn btn-outline-primary" type="button">Search</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex justify-content-end">
+                            <select class="form-select w-auto me-2">
+                                <option selected>Sort by: Featured</option>
+                                <option>Price: Low to High</option>
+                                <option>Price: High to Low</option>
+                                <option>Name: A to Z</option>
+                                <option>Name: Z to A</option>
+                            </select>
+                            <div class="btn-group">
+                                <button class="btn btn-outline-primary active">
+                                    <i class="fas fa-th"></i>
+                                </button>
+                                <button class="btn btn-outline-primary">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <ul class="nav nav-pills justify-content-center">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">All Products</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Groceries</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Stationery</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Creative Supplies</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Household</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row" id="products-container">
+                <!-- Products will be loaded dynamically with JavaScript -->
+            </div>
+            
+            <nav class="mt-5">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">Previous</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+
+    <!-- About Us Page -->
+    <section id="about" class="page-section" style="display: none;">
+        <div class="about-hero">
+            <div class="container">
+                <h1 class="display-4 fw-bold">About ANU CREATIVE</h1>
+                <p class="lead">Delivering quality and creativity since 2015</p>
+            </div>
+        </div>
+        
+        <div class="container mt-5">
+            <div class="row mb-5">
+                <div class="col-lg-6">
+                    <h2 class="section-title">Our Story</h2>
+                    <p>Founded in 2015, ANU CREATIVE began as a small neighborhood store with a vision to provide quality groceries and creative stationery at affordable prices. What started as a single store has now grown into a trusted brand serving thousands of customers across the city.</p>
+                    <p>Our mission is to make everyday shopping convenient, affordable, and enjoyable for everyone. We carefully select our products to ensure the highest quality standards while keeping prices competitive.</p>
+                    <p>At ANU CREATIVE, we believe that creativity should be accessible to all. That's why we offer a wide range of art supplies and creative tools alongside our grocery and stationery products.</p>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1563017405-8d4c6ab7fb2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="img-fluid rounded shadow" alt="Our Store">
+                </div>
+            </div>
+            
+            <div class="row mb-5">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-title">Why Choose Us</h2>
+                </div>
+                <div class="col-md-4 text-center mb-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h4>Quality Products</h4>
+                    <p class="text-muted">We source only the best products from trusted suppliers and local farmers.</p>
+                </div>
+                <div class="col-md-4 text-center mb-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h4>Affordable Prices</h4>
+                    <p class="text-muted">We offer competitive prices without compromising on quality.</p>
+                </div>
+                <div class="col-md-4 text-center mb-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4>Customer Focus</h4>
+                    <p class="text-muted">Our customers are at the heart of everything we do.</p>
+                </div>
+            </div>
+            
+            <div class="row mb-5">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-title">Our Stats</h2>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="stats-card">
+                        <div class="stats-number">50,000+</div>
+                        <h5>Happy Customers</h5>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="stats-card">
+                        <div class="stats-number">5,000+</div>
+                        <h5>Products</h5>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="stats-card">
+                        <div class="stats-number">15+</div>
+                        <h5>Store Locations</h5>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="stats-card">
+                        <div class="stats-number">8</div>
+                        <h5>Years Experience</h5>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-title">Meet Our Team</h2>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="team-card text-center p-4">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" class="rounded-circle mb-3" width="120" alt="Team Member">
+                        <h4>Priya Sharma</h4>
+                        <p class="text-muted">Founder & CEO</p>
+                        <p>With over 10 years of experience in retail, Priya leads our vision for growth and innovation.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="team-card text-center p-4">
+                        <img src="https://randomuser.me/api/portraits/men/54.jpg" class="rounded-circle mb-3" width="120" alt="Team Member">
+                        <h4>Anubhav J G</h4>
+                        <p class="text-muted">Operations Manager</p>
+                        <p>Rahul ensures our stores run smoothly and our customers have the best shopping experience.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="team-card text-center p-4">
+                        <img src="https://randomuser.me/api/portraits/women/67.jpg" class="rounded-circle mb-3" width="120" alt="Team Member">
+                        <h4>Anita Patel</h4>
+                        <p class="text-muted">Product Curator</p>
+                        <p>Anita carefully selects each product to ensure it meets our quality and value standards.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stores Page -->
+    <section id="stores" class="page-section bg-light" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">Our Stores</h2>
+            <p class="lead text-center mb-5">Visit us at any of our conveniently located stores</p>
+            
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="store-card">
+                        <img src="https://images.unsplash.com/photo-1563017405-8d4c6ab7fb2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Store Location">
+                        <div class="card-body">
+                            <h4 class="card-title">ANU CREATIVE Main Store</h4>
+                            <p class="card-text">123 Shopping Street, City Center, Mumbai, Maharashtra 400001</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <small class="text-muted"><i class="fas fa-clock me-1"></i> 8:00 AM - 10:00 PM</small>
+                                </div>
+                                <a href="#" class="btn btn-primary btn-sm">Get Directions</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="store-card">
+                        <img src="https://images.unsplash.com/photo-1561715276-a2d087060f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Store Location">
+                        <div class="card-body">
+                            <h4 class="card-title">ANU CREATIVE Andheri</h4>
+                            <p class="card-text">Shop No. 45, Andheri West, Mumbai, Maharashtra 400053</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <small class="text-muted"><i class="fas fa-clock me-1"></i> 8:00 AM - 10:00 PM</small>
+                                </div>
+                                <a href="#" class="btn btn-primary btn-sm">Get Directions</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="store-card">
+                        <img src="https://images.unsplash.com/photo-1578911373281-34c0e90b013f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Store Location">
+                        <div class="card-body">
+                            <h4 class="card-title">ANU CREATIVE Bandra</h4>
+                            <p class="card-text">Ground Floor, Bandra Kurla Complex, Mumbai, Maharashtra 400051</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <small class="text-muted"><i class="fas fa-clock me-1"></i> 8:00 AM - 10:00 PM</small>
+                                </div>
+                                <a href="#" class="btn btn-primary btn-sm">Get Directions</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="store-card">
+                        <img src="https://images.unsplash.com/photo-1561715276-a2d087060f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Store Location">
+                        <div class="card-body">
+                            <h4 class="card-title">ANU CREATIVE Thane</h4>
+                            <p class="card-text">Unit 12, Viviana Mall, Thane West, Maharashtra 400601</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <small class="text-muted"><i class="fas fa-clock me-1"></i> 9:00 AM - 9:00 PM</small>
+                                </div>
+                                <a href="#" class="btn btn-primary btn-sm">Get Directions</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Page -->
+    <section id="contact" class="page-section" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h4 class="card-title mb-4">Send us a Message</h4>
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="name" class="form-label">Your Name</label>
+                                        <input type="text" class="form-control" id="name" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="email" class="form-label">Email Address</label>
+                                        <input type="email" class="form-control" id="email" required>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="subject" class="form-label">Subject</label>
+                                    <input type="text" class="form-control" id="subject" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Message</label>
+                                    <textarea class="form-control" id="message" rows="5" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h4 class="card-title mb-4">Get in Touch</h4>
+                            <div class="mb-4">
+                                <h6><i class="fas fa-map-marker-alt me-2 text-primary"></i> Our Address</h6>
+                                <p>123 Shopping Street, City Center, Mumbai, Maharashtra 400001</p>
+                            </div>
+                            <div class="mb-4">
+                                <h6><i class="fas fa-phone me-2 text-primary"></i> Phone Number</h6>
+                                <p>+91 98765 43210</p>
+                            </div>
+                            <div class="mb-4">
+                                <h6><i class="fas fa-envelope me-2 text-primary"></i> Email Address</h6>
+                                <p>info@anucreative.com</p>
+                            </div>
+                            <div class="mb-4">
+                                <h6><i class="fas fa-clock me-2 text-primary"></i> Store Hours</h6>
+                                <p>Monday - Saturday: 8:00 AM - 10:00 PM<br>Sunday: 9:00 AM - 9:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Dashboard -->
+    <section id="customer-dashboard" class="page-section customer-dashboard dashboard-section" style="display: none;">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-5">
+                <h2 class="section-title mb-0">Customer Dashboard</h2>
+                <div>
+                    <span class="fw-bold">Welcome, Priya Sharma</span>
+                    <span class="user-badge customer-badge">Customer</span>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="dashboard-card text-center">
+                        <div class="dashboard-icon">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <h3>5</h3>
+                        <p class="text-muted">Current Orders</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card text-center">
+                        <div class="dashboard-icon">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <h3>24</h3>
+                        <p class="text-muted">Order History</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card text-center">
+                        <div class="dashboard-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>12</h3>
+                        <p class="text-muted">Wishlist Items</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card text-center">
+                        <div class="dashboard-icon">
+                            <i class="fas fa-tag"></i>
+                        </div>
+                        <h3>3</h3>
+                        <p class="text-muted">Active Coupons</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-md-8">
+                    <div class="dashboard-card">
+                        <h4 class="mb-4">Recent Orders</h4>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Date</th>
+                                        <th>Items</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>#ANU7824</td>
+                                        <td>15 Oct 2023</td>
+                                        <td>3</td>
+                                        <td>₹1,245</td>
+                                        <td><span class="order-status status-completed">Delivered</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>#ANU7819</td>
+                                        <td>12 Oct 2023</td>
+                                        <td>5</td>
+                                        <td>₹2,150</td>
+                                        <td><span class="order-status status-pending">Processing</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>#ANU7805</td>
+                                        <td>08 Oct 2023</td>
+                                        <td>2</td>
+                                        <td>₹899</td>
+                                        <td><span class="order-status status-completed">Delivered</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="dashboard-card">
+                        <h4 class="mb-4">Quick Actions</h4>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-customer mb-2">Track Order</button>
+                            <button class="btn btn-outline-primary mb-2">Update Profile</button>
+                            <button class="btn btn-outline-primary mb-2">Change Password</button>
+                            <button class="btn btn-outline-primary mb-2">Payment Methods</button>
+                            <button class="btn btn-outline-primary">Address Book</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Manager Dashboard -->
+    <section id="manager-dashboard" class="page-section manager-dashboard dashboard-section" style="display: none;">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-5">
+                <h2 class="section-title mb-0">Manager Dashboard</h2>
+                <div>
+                    <span class="fw-bold">Welcome, Rahul Verma</span>
+                    <span class="user-badge manager-badge">Manager</span>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="dashboard-card text-center">
+                        <div class="dashboard-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h3>142</h3>
+                        <p class="text-muted">Today's Orders</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card text-center">
+                        <div class="dashboard-icon">
+                            <i class="fas fa-rupee-sign"></i>
+                        </div>
+                        <h3>₹84,520</h3>
+                        <p class="text-muted">Today's Revenue</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card text-center">
+                        <div class="dashboard-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>89</h3>
+                        <p class="text-muted">New Customers</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="dashboard-card text-center">
+                        <div class="dashboard-icon">
+                            <i class="fas fa-box-open"></i>
+                        </div>
+                        <h3>23</h3>
+                        <p class="text-muted">Low Stock Items</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-md-8">
+                    <div class="dashboard-card">
+                        <h4 class="mb-4">Recent Orders</h4>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Customer</th>
+                                        <th>Items</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>#ANU7824</td>
+                                        <td>Priya Sharma</td>
+                                        <td>3</td>
+                                        <td>₹1,245</td>
+                                        <td><span class="order-status status-completed">Delivered</span></td>
+                                        <td><button class="btn btn-manager btn-sm">View</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>#ANU7823</td>
+                                        <td>Raj Patel</td>
+                                        <td>5</td>
+                                        <td>₹2,150</td>
+                                        <td><span class="order-status status-pending">Processing</span></td>
+                                        <td><button class="btn btn-manager btn-sm">Update</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>#ANU7821</td>
+                                        <td>Anita Desai</td>
+                                        <td>2</td>
+                                        <td>₹899</td>
+                                        <td><span class="order-status status-cancelled">Cancelled</span></td>
+                                        <td><button class="btn btn-manager btn-sm">View</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="dashboard-card">
+                        <h4 class="mb-4">Quick Actions</h4>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-manager mb-2">Manage Inventory</button>
+                            <button class="btn btn-outline-primary mb-2">View Reports</button>
+                            <button class="btn btn-outline-primary mb-2">Staff Management</button>
+                            <button class="btn btn-outline-primary mb-2">Promotions</button>
+                            <button class="btn btn-outline-primary">Store Settings</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <h5>ANU CREATIVE</h5>
+                    <p>Your one-stop destination for all grocery and stationery needs. Quality products at affordable prices.</p>
+                    <div class="d-flex">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#stores">Our Stores</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Customer Service</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Returns & Refunds</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>Newsletter</h5>
+                    <p>Subscribe to our newsletter for the latest updates and offers.</p>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Your email">
+                        <button class="btn btn-primary" type="button">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center">
+                <p>&copy; 2023 ANU CREATIVE. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Simple page navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show home page by default
+            showPage('home');
+            
+            // Add click event listeners to navigation links
+            document.querySelectorAll('nav a.nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('href').substring(1);
+                    showPage(pageId);
+                    
+                    // Update active nav link
+                    document.querySelectorAll('nav a.nav-link').forEach(navLink => {
+                        navLink.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                });
+            });
+            
+            // Page indicator dots
+            document.querySelectorAll('.page-dot').forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const pageId = this.getAttribute('data-page');
+                    showPage(pageId);
+                    
+                    // Update active nav link
+                    document.querySelectorAll('nav a.nav-link').forEach(navLink => {
+                        navLink.classList.remove('active');
+                        if (navLink.getAttribute('href') === `#${pageId}`) {
+                            navLink.classList.add('active');
+                        }
+                    });
+                    
+                    // Update active dots
+                    document.querySelectorAll('.page-dot').forEach(d => {
+                        d.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                });
+            });
+            
+            // Function to show specific page and hide others
+            function showPage(pageId) {
+                // Hide all pages
+                document.querySelectorAll('.page-section').forEach(page => {
+                    page.style.display = 'none';
+                });
+                
+                // Show the selected page
+                document.getElementById(pageId).style.display = 'block';
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+                
+                // Update active dots
+                document.querySelectorAll('.page-dot').forEach(dot => {
+                    dot.classList.remove('active');
+                    if (dot.getAttribute('data-page') === pageId) {
+                        dot.classList.add('active');
+                    }
+                });
+            }
+            
+            // Add to cart functionality
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    const badge = document.querySelector('.cart-badge');
+                    let count = parseInt(badge.textContent);
+                    count++;
+                    badge.textContent = count;
+                    
+                    // Show a simple alert (in a real app, this would update the cart)
+                    alert('Product added to cart!');
+                });
+            });
+            
+            // Login functionality
+            const loginModal = document.getElementById('loginModal');
+            const loginBtn = document.getElementById('login-btn');
+            const customerLoginBtn = document.getElementById('customer-login-btn');
+            const managerLoginBtn = document.getElementById('manager-login-btn');
+            const logoutBtn = document.getElementById('logout-btn');
+            const userInfo = document.getElementById('user-info');
+            const loginButtons = document.getElementById('login-buttons');
+            const userName = document.getElementById('user-name');
+            const userBadge = document.getElementById('user-badge');
+            
+            // Login tabs
+            document.querySelectorAll('.login-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabType = this.getAttribute('data-tab');
+                    
+                    // Update active tab
+                    document.querySelectorAll('.login-tab').forEach(t => {
+                        t.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    // Show appropriate login form
+                    if (tabType === 'customer') {
+                        document.getElementById('customer-login').style.display = 'block';
+                        document.getElementById('manager-login').style.display = 'none';
+                    } else {
+                        document.getElementById('customer-login').style.display = 'none';
+                        document.getElementById('manager-login').style.display = 'block';
+                    }
+                });
+            });
+            
+            // Open login modal
+            loginBtn.addEventListener('click', function() {
+                loginModal.style.display = 'flex';
+            });
+            
+            // Close login modal when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target === loginModal) {
+                    loginModal.style.display = 'none';
+                }
+            });
+            
+            // Customer login
+            customerLoginBtn.addEventListener('click', function() {
+                const email = document.getElementById('customer-email').value;
+                if (email) {
+                    // In a real app, you would validate credentials with a server
+                    loginModal.style.display = 'none';
+                    loginButtons.style.display = 'none';
+                    userInfo.classList.remove('d-none');
+                    userName.textContent = 'Priya Sharma';
+                    userBadge.textContent = 'Customer';
+                    userBadge.className = 'user-badge customer-badge';
+                    
+                    // Show customer dashboard
+                    showPage('customer-dashboard');
+                } else {
+                    alert('Please enter your email and password');
+                }
+            });
+            
+            // Manager login
+            managerLoginBtn.addEventListener('click', function() {
+                const username = document.getElementById('manager-username').value;
+                if (username) {
+                    // In a real app, you would validate credentials with a server
+                    loginModal.style.display = 'none';
+                    loginButtons.style.display = 'none';
+                    userInfo.classList.remove('d-none');
+                    userName.textContent = 'Rahul Verma';
+                    userBadge.textContent = 'Manager';
+                    userBadge.className = 'user-badge manager-badge';
+                    
+                    // Show manager dashboard
+                    showPage('manager-dashboard');
+                } else {
+                    alert('Please enter your username and password');
+                }
+            });
+            
+            // Logout
+            logoutBtn.addEventListener('click', function() {
+                userInfo.classList.add('d-none');
+                loginButtons.style.display = 'flex';
+                
+                // Show home page
+                showPage('home');
+                
+                // Update navigation
+                document.querySelectorAll('nav a.nav-link').forEach(navLink => {
+                    navLink.classList.remove('active');
+                    if (navLink.getAttribute('href') === '#home') {
+                        navLink.classList.add('active');
+                    }
+                });
+            });
+            
+            // Load products for products page
+            const productsContainer = document.getElementById('products-container');
+            const products = [
+                { name: 'Organic Bananas', price: '₹80/kg', image: 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', category: 'groceries' },
+                { name: 'Premium Ball Pens', price: '₹120', image: 'https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', category: 'stationery' },
+                { name: 'Watercolor Set', price: '₹450', image: 'https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', category: 'creative' },
+                { name: 'Whole Wheat Bread', price: '₹60', image: 'https://images.unsplash.com/photo-1549931319-a545dcf3bc73?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', category: 'groceries' },
+                { name: 'Sticky Notes', price: '₹85', image: 'https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', category: 'stationery' },
+                { name: 'Sketchbook', price: '₹220', image: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', category: 'creative' },
+                { name: 'Fresh Milk', price: '₹55/ltr', image: 'https://images.unsplash.com/photo-1563636619-e9143da7973b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', category: 'groceries' },
+                { name: 'Highlighters', price: '₹150', image: 'https://images.unsplash.com/photo-1585336261022-680e295ce3fe?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', category: 'stationery' }
+            ];
+            
+            function loadProducts() {
+                productsContainer.innerHTML = '';
+                products.forEach(product => {
+                    const productHTML = `
+                        <div class="col-md-3 mb-4">
+                            <div class="card product-card h-100">
+                                <img src="${product.image}" class="card-img-top" alt="${product.name}">
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title">${product.name}</h5>
+                                    <p class="card-text text-muted">High quality product for everyday use.</p>
+                                    <div class="mt-auto">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="fw-bold text-primary">${product.price}</span>
+                                            <button class="btn btn-primary btn-sm add-to-cart">
+                                                <i class="fas fa-cart-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    productsContainer.innerHTML += productHTML;
+                });
+                
+                // Re-attach event listeners to new add-to-cart buttons
+                document.querySelectorAll('.add-to-cart').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const badge = document.querySelector('.cart-badge');
+                        let count = parseInt(badge.textContent);
+                        count++;
+                        badge.textContent = count;
+                        alert('Product added to cart!');
+                    });
+                });
+            }
+            
+            // Load products when products page is shown
+            document.querySelector('a[href="#products"]').addEventListener('click', loadProducts);
+        });
+    </script>
+</body>
+</html>
